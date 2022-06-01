@@ -1,18 +1,20 @@
-npm start
-
-# debouncing
- use setTimeOut : 
-    it returns a timerId that we can use to check pending api call
-
-
-
 ## Searchbar component using reactjs
-
-#### Example:
-
-TweetWorld 
-
 An application used to search data form restCountries api, built with React, JavaScript,HTML and CSS.
+
+## Installation and Setup Instructions
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+
+Installation:
+
+`npm install`   
+
+To Start Server:
+
+`npm start`  
+
+To Visit App:
+
+`localhost:3000`  
 
 ## Project Screen Shot(s)
 main page
@@ -33,21 +35,6 @@ before using debouncing:
 after using debouncing:
    ![after](./screenshots/afterDeBouncing.png)
 
-## Installation and Setup Instructions
-
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
-
-Installation:
-
-`npm install`   
-
-To Start Server:
-
-`npm start`  
-
-To Visit App:
-
-`localhost:3000`  
 
 ## Reflection
 
