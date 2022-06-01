@@ -8,6 +8,7 @@ const SearchBar = () => {
   const [searchText, setsearchText] = useState("");
   const [results, setresults] = useState([]);
   const [showLoader, setshowLoader] = useState(false);
+  const [timerId, settimerId] = useState(undefined);
 
   function capitalize(searchTerm) {
     const words = searchTerm.split(" ");
@@ -18,21 +19,31 @@ const SearchBar = () => {
     return str;
   }
 
+  function deBouncing(e){
+    if(timerId){
+      clearTimeout(timerId); //to remove pending api calls
+    }
+    settimerId(setTimeout(()=> getResFromAPI(e.target.value),500));
+  }
+
+
   function getResFromLocalData(query) {
     const resultToShow = SEARCH_DATA.filter((item) =>
       item.name.official.includes(capitalize(query))
     );
     setresults(resultToShow);
-    // console.log(results);
+    setshowLoader(false);
+    console.log(results);
   }
 
   function handleInputText(e) {
     setsearchText(e.target.value);
-    setresults([]);
+    setresults([]); 
     if (e.target.value !== "") {
       setshowLoader(true);
       // getResFromLocalData(e.target.value);
-      getResFromAPI(e.target.value); 
+      // getResFromAPI(e.target.value); 
+      deBouncing(e);
     }
 
   }
@@ -44,7 +55,7 @@ const SearchBar = () => {
     const data = await response.json();
     setresults(data);
     setshowLoader(false);
-    console.log(results);
+    // console.log(results);
   };
 
   return (
@@ -94,7 +105,7 @@ const SearchBar = () => {
           </div>)
         }
 
-        {  ((results.status === 404) && !showLoader) && (<div className="results">
+        {  ((results.status === 404 || (results.length === 0 && searchText !== "")) && !showLoader) && (<div className="results">
             <div className="suggestions">
                <p>No results found</p>
             </div>
