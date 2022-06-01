@@ -7,6 +7,7 @@ import { SEARCH_DATA } from "../../data/searchData";
 const SearchBar = () => {
   const [searchText, setsearchText] = useState("");
   const [results, setresults] = useState([]);
+  const [showLoader, setshowLoader] = useState(false);
 
   function capitalize(searchTerm) {
     const words = searchTerm.split(" ");
@@ -22,16 +23,29 @@ const SearchBar = () => {
       item.name.official.includes(capitalize(query))
     );
     setresults(resultToShow);
-    console.log(results);
+    // console.log(results);
   }
 
   function handleInputText(e) {
     setsearchText(e.target.value);
     setresults([]);
-    if(e.target.value !== ''){
-      getResFromLocalData(e.target.value);
+    if (e.target.value !== "") {
+      setshowLoader(true);
+      // getResFromLocalData(e.target.value);
+      getResFromAPI(e.target.value); 
     }
+
   }
+
+  const getResFromAPI = async (query) => {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${capitalize(query)}`
+    );
+    const data = await response.json();
+    setresults(data);
+    setshowLoader(false);
+    console.log(results);
+  };
 
   return (
     <>
@@ -63,16 +77,30 @@ const SearchBar = () => {
             <line x1="21" y1="21" x2="15" y2="15" />
           </svg>
         </div>
-      {results.length > 0 && <div className="results">
-        <div className="suggestions">
-          {results.map((item)=>(
-            <p>{item.name.official}</p>
-          ))}
-        </div>
-      </div> }
-      </div>
+        {results.length > 0 && (
+          <div className="results">
+            <div className="suggestions">
+              {results.map((item) => (
+                <p>{item.name.official}</p>
+              ))}
+            </div>
+          </div>
+        )}
 
-      
+        {  (showLoader) && (<div className="results">
+            <div className="suggestions">
+                <div className="skeleton skeleton-text"></div>
+            </div>
+          </div>)
+        }
+
+        {  ((results.status === 404) && !showLoader) && (<div className="results">
+            <div className="suggestions">
+               <p>No results found</p>
+            </div>
+          </div>)
+        }
+      </div>
     </>
   );
 };

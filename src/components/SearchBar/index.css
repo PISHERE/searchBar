@@ -1,66 +1,82 @@
-.title{
-    font-size: clamp(64px, 12vh, 100vh);
-    text-transform: uppercase;
+.title {
+  font-size: clamp(64px, 12vh, 100vh);
+  text-transform: uppercase;
 }
 
-
-.input-text{
-    width:90%;
-    border: none;
-    outline: none;
-    border-radius: 24px 0px 0px 24px;
-    font-size: 3vh;
-    padding-left: 1.5vw;
+.input-text {
+  width: 90%;
+  border: none;
+  outline: none;
+  border-radius: 24px 0px 0px 24px;
+  font-size: 3vh;
+  padding-left: 1.5vw;
 }
 
-.search-icon{
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    background-color: white;
-    border-radius:0 24px 24px 0px;
-    transition: all 0.2s;
-
+.search-icon {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 0 24px 24px 0px;
+  transition: all 0.2s;
 }
 
-.search-icon:hover{
-    background-color: rgba(0, 200, 255, 0.3);
-    color: black;
+.search-icon:hover {
+  background-color: rgba(0, 200, 255, 0.3);
+  color: black;
 }
 
-.search-bar{
-    display: flex;
-    justify-content: center;
-    width: 60%;
-    height:clamp(40px,5vh,100vh);
-    position: relative;
+.search-bar {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  height: clamp(40px, 5vh, 100vh);
+  position: relative;
 }
 
-
-.results{
-    width: 89%;
-    margin-top: 2px;
-    position: absolute;
-    top:clamp(40px,5vh,100vh);
+.results {
+  width: 89%;
+  margin-top: 2px;
+  position: absolute;
+  top: clamp(40px, 5vh, 100vh);
 }
 
-.results > .suggestions{
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 0px 0px 25px 25px;
-    width: 100%;
-    max-height: 310px;
-    overflow-y: auto;
-    padding-bottom: 1vh;
+.results > .suggestions {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 0px 25px 25px;
+  width: 100%;
+  max-height: 310px;
+  overflow-y: auto;
+  padding-bottom: 1vh;
 }
 
-.results > .suggestions > p{
-    margin:2px 2vw;
-    cursor: pointer;
-    padding: 20px;
-
+.results > .suggestions > p {
+  margin: 2px 2vw;
+  cursor: pointer;
+  padding: 20px;
 }
 
-.results > .suggestions > p:hover{
-    background-color: rgba(255,255,255,0.7);
+.results > .suggestions > p:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 80%);
+  }
+  100% {
+    background-color: hsl(202, 8%, 95%);
+  }
+}
+
+.skeleton-text {
+  width: 20%;
+  height: 0.7rem;
+  margin: 20px;
+  cursor: pointer;
 }
