@@ -33,7 +33,7 @@ const SearchBar = () => {
     );
     setresults(resultToShow);
     setshowLoader(false);
-    console.log(results);
+    // console.log(results);
   }
 
   function handleInputText(e) {
